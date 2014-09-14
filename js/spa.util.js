@@ -53,24 +53,25 @@ spa.util = (function(){
      Throws : Exception if input key not allowed
     */
  
-    setConfigMap = function(arg_map){
+    setConfigMap = function(arg_map){  //the arg_map is created using the argument passed to this call
         var
-            input_map = arg_map.input_map,
+            input_map = arg_map.input_map, //parse the items back out into their own individual maps
             settable_map = arg_map.settable_map,
             config_map = arg_map.config_map,
             key_name, error;
  
-            console.log('input_map: ' + input_map);
-            console.log('arg_map: ' + arg_map);
- 
-             
- 
         for(key_name in input_map){
-            console.log('key_name: ' + key_name);
+            /*
+            loop through the input_map  and do 3 things.
+            1.  If input_map has the key name proceed otherwise throw an error.  How could it not
+            if we are iterating through the input_map?
+            2. If the settable_map has this property then
+            3. set the key_name and value in the config_map
+            */
  
-            if(input_map.hasOwnProperty(key_name)){
-                if(settable_map.hasOwnProperty(key_name)){
-                    config_map[key_name] = input_map[key_name];
+            if(input_map.hasOwnProperty(key_name)){   //if the input_map has the key_name
+                if(settable_map.hasOwnProperty(key_name)){ //look for it in the settable_map
+                    config_map[key_name] = input_map[key_name]; //if settable then update the config_map
                 }
                 else{
                     error = makeError('Bad Input', 'Setting config key |' + key_name + '| is not supported');
